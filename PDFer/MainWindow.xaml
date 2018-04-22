@@ -9,17 +9,22 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Button Content="SPLIT" Command="{Binding Path=SplitFileCommand, Mode=OneWay}"/>
+            <Button Grid.Row="0" Content="SPLIT" Command="{Binding Path=SplitFileCommand, Mode=OneWay}"/>
             <hilib:DataGridEx
-            AutoGenerateColumns="False"
-            AllowDrop="True"
-            DragEnter="DataGridEx_DragEnter"
-            Drop="DataGridEx_Drop"
-            ItemsSource="{Binding Path=SplitFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                Grid.Row="1"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                AutoGenerateColumns="False"
+                AllowDrop="True"
+                DragEnter="DataGridEx_DragEnter"
+                Drop="DataGridEx_Drop"
+                PreviewMouseDoubleClick="DataGridEx_PreviewMouseDoubleClick"
+                ItemsSource="{Binding Path=SplitFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Name" MaxWidth="300">
                         <DataGridTemplateColumn.CellTemplate>
@@ -34,15 +39,17 @@
                     <DataGridTextColumn Header="Pages" Binding="{Binding Path=Pages, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </DataGrid.Columns>
             </hilib:DataGridEx>
-        </StackPanel>
-        <StackPanel Grid.Row="1">
-        <Button Content="MERGE" Command="{Binding Path=MergeFileCommand, Mode=OneWay}"/>
+        <Button Grid.Row="2" Content="MERGE" Command="{Binding Path=MergeFileCommand, Mode=OneWay}"/>
             <hilib:DataGridEx
-            AutoGenerateColumns="False"
-            AllowDrop="True"
-            DragEnter="DataGridEx_DragEnter"
-            Drop="DataGridEx_Drop"            
-            ItemsSource="{Binding Path=MergeFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                Grid.Row="3"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                AutoGenerateColumns="False"
+                AllowDrop="True"
+                DragEnter="DataGridEx_DragEnter"
+                Drop="DataGridEx_Drop"    
+                PreviewMouseDoubleClick="DataGridEx_PreviewMouseDoubleClick"
+                ItemsSource="{Binding Path=MergeFiles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Name" MaxWidth="300">
                         <DataGridTemplateColumn.CellTemplate>
@@ -57,6 +64,5 @@
                     <DataGridTextColumn Header="Pages" Binding="{Binding Path=Pages, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </DataGrid.Columns>
             </hilib:DataGridEx>
-        </StackPanel>
     </Grid>
 </Window>

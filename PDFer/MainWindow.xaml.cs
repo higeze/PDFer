@@ -50,13 +50,28 @@ namespace PDFer
                 if ((null == droppedFiles) || (!droppedFiles.Any())) { return; }
 
                 var files = ((sender as DataGrid).ItemsSource) as ObservableCollection<PdfFile>;
-
-                foreach (var filePath in droppedFiles)
+                if (files != null)
                 {
-                    files.Add(new PdfFile(filePath));
+                    foreach (var filePath in droppedFiles)
+                    {
+                        files.Add(new PdfFile(filePath));
+                    }
                 }
             }
 
+        }
+
+        private void DataGridEx_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var elem = e.MouseDevice.DirectlyOver as FrameworkElement;
+            if (elem != null)
+            {
+                var file = elem.DataContext as PdfFile;
+                if (System.IO.File.Exists(file.Path))
+                {
+                    System.Diagnostics.Process.Start(file.Path);
+                }
+            }
         }
     }
 }
